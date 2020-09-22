@@ -11,19 +11,32 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+
+/**
+ * @author Ali Moussa Chouman
+ * @since 24 Sep 2020
+ */
+
 @Entity
+@ApiModel(value = "Cozinha", description = "Informacoes da Cozinha")
 public class Cozinha implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(dataType = "Integer", name = "id", value = "Código de identificação da Cozinha")
 	private Integer id;
 
 	@Column(nullable = false)
+	@ApiModelProperty(dataType = "String", name = "nome", value = "Nome da cozinha")
 	private String nome;
 
 	@OneToMany(mappedBy = "cozinha")
+	@ApiModelProperty(dataType = "List", name = "fotos", value = "Fotos relacionadas a cozinha")
 	private List<Foto> fotos = new ArrayList<>();
 
 	public Cozinha() {

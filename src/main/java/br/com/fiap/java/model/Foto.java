@@ -12,16 +12,27 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * @author Ali Moussa Chouman
+ * @since 24 Sep 2020
+ */
+
 @Entity
+@ApiModel(value = "Foto", description = "Informacoes da Foto")
 public class Foto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(dataType = "Integer", name = "id", value = "Código de identificação da foto")
 	private Integer id;
 
 	@Column(nullable = false)
+	@ApiModelProperty(dataType = "String", name = "baseFoto", value = "Base 64 da foto")
 	private String baseFoto;
 
 	@ManyToOne

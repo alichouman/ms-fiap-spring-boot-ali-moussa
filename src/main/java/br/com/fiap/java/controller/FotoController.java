@@ -22,17 +22,22 @@ import br.com.fiap.java.dto.FotoDTO;
 import br.com.fiap.java.model.Foto;
 import br.com.fiap.java.service.FotoService;
 
+/**
+ * @author Ali Moussa Chouman
+ * @since 24 Sep 2020
+ */
+
 @RestController
 @RequestMapping("/fotos")
 public class FotoController {
 
 	@Autowired
-	private FotoService cozinhaService;
+	private FotoService fotoService;
 
 	@GetMapping()
 	public ResponseEntity<List<Foto>> listar() {
 
-		List<Foto> fotos = cozinhaService.findAll();
+		List<Foto> fotos = fotoService.findAll();
 
 		return ResponseEntity.ok().body(fotos);
 
@@ -40,18 +45,18 @@ public class FotoController {
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Foto> buscar(@PathVariable(value = "id") Integer id) {
-		Foto cozinha = cozinhaService.find(id);
+		Foto foto = fotoService.find(id);
 
-		return ResponseEntity.ok(cozinha);
+		return ResponseEntity.ok(foto);
 
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Void> cadastrar(@Validated @RequestBody FotoDTO fotoDTO) {
-		Foto cozinha = cozinhaService.converterDTO(fotoDTO);
-		cozinha = cozinhaService.cadastrar(cozinha);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cozinha.getId())
+		Foto foto = fotoService.converterDTO(fotoDTO);
+		foto = fotoService.cadastrar(foto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(foto.getId())
 				.toUri();
 		return ResponseEntity.created(uri).build();
 
@@ -59,15 +64,15 @@ public class FotoController {
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Void> atualizar(@Validated @RequestBody FotoDTO fotoDTO, @PathVariable Integer id) {
-		Foto cozinha = cozinhaService.converterDTO(fotoDTO);
-		cozinha.setId(id);
-		cozinha = cozinhaService.atualizar(cozinha);
+		Foto foto = fotoService.converterDTO(fotoDTO);
+		foto.setId(id);
+		foto = fotoService.atualizar(foto);
 		return ResponseEntity.noContent().build();
 	}
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deletar(@PathVariable Integer id) {
-		cozinhaService.deletar(id);
+		fotoService.deletar(id);
 		return ResponseEntity.noContent().build();
 	}
 

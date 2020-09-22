@@ -1,5 +1,10 @@
 package br.com.fiap.java.service;
 
+/**
+ * @author Ali Moussa Chouman
+ * @since 24 Sep 2020
+ */
+
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +15,7 @@ import org.springframework.stereotype.Service;
 import br.com.fiap.java.dto.FotoDTO;
 import br.com.fiap.java.exception.DataIntegrityException;
 import br.com.fiap.java.exception.ObjectNotFoundException;
+import br.com.fiap.java.model.Cozinha;
 import br.com.fiap.java.model.Foto;
 import br.com.fiap.java.repository.FotoRepository;
 
@@ -18,6 +24,9 @@ public class FotoService {
 
 	@Autowired
 	private FotoRepository fotoRepository;
+
+	@Autowired
+	private CozinhaService cozinhaService;
 
 	public List<Foto> findAll() {
 		return fotoRepository.findAll();
@@ -33,7 +42,6 @@ public class FotoService {
 	public Foto cadastrar(Foto foto) {
 		return fotoRepository.save(foto);
 	}
-
 
 	public Foto atualizar(Foto foto) {
 		Foto fotoAtualizada = this.find(foto.getId());
@@ -56,8 +64,8 @@ public class FotoService {
 	}
 
 	public Foto converterDTO(FotoDTO fotoDTO) {
-		// TODO Auto-generated method stub
-		return null;
+		Cozinha cozinha = cozinhaService.find(fotoDTO.getCozinhaId());
+		return new Foto(null, fotoDTO.getBaseFotoDTO(), cozinha);
 	}
 
 }

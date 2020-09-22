@@ -13,6 +13,11 @@ import br.com.fiap.java.exception.ObjectNotFoundException;
 import br.com.fiap.java.model.Cozinha;
 import br.com.fiap.java.repository.CozinhaRepository;
 
+/**
+ * @author Ali Moussa Chouman
+ * @since 24 Sep 2020
+ */
+
 @Service
 public class CozinhaService {
 
