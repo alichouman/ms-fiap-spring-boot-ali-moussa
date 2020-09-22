@@ -3,8 +3,6 @@ package br.com.fiap.java.controller;
 import java.net.URI;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,8 +36,6 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("/cozinhas")
 public class CozinhaController {
 
-	private static final Logger LOG = LoggerFactory.getLogger(CozinhaController.class);
-
 	@Autowired
 	private CozinhaService cozinhaService;
 
@@ -48,9 +44,7 @@ public class CozinhaController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK", response = Cozinha.class) })
 	@GetMapping()
 	public ResponseEntity<List<Cozinha>> listar() {
-
 		List<Cozinha> cozinhas = cozinhaService.findAll();
-
 		return ResponseEntity.ok().body(cozinhas);
 
 	}
@@ -62,7 +56,6 @@ public class CozinhaController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Cozinha> buscar(@PathVariable(value = "id") Integer id) {
 		Cozinha cozinha = cozinhaService.find(id);
-
 		return ResponseEntity.ok(cozinha);
 
 	}
@@ -71,10 +64,10 @@ public class CozinhaController {
 	@ResponseStatus(code = HttpStatus.CREATED, value = HttpStatus.CREATED)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created") })
 	@PostMapping
-	public ResponseEntity<Void> cadastrar(@Validated @RequestBody CozinhaDTO cozinha) {
-		Cozinha cozinhaObjeto = cozinhaService.converterDTO(cozinha);
-		cozinhaObjeto = cozinhaService.cadastrar(cozinhaObjeto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cozinhaObjeto.getId())
+	public ResponseEntity<Void> cadastrar(@Validated @RequestBody CozinhaDTO cozinhaDTO) {
+		Cozinha cozinha = cozinhaService.converterDTO(cozinhaDTO);
+		cozinha = cozinhaService.cadastrar(cozinha);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cozinha.getId())
 				.toUri();
 		return ResponseEntity.created(uri).build();
 
@@ -91,7 +84,7 @@ public class CozinhaController {
 		cozinhaObjeto = cozinhaService.atualizar(cozinhaObjeto);
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@ApiOperation(value = "Atualiza uma cozinha cadastrada.")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT, value = HttpStatus.NO_CONTENT)
 	@ApiResponses(value = { @ApiResponse(code = 204, message = "No Content"),

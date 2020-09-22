@@ -28,11 +28,11 @@ public class Cozinha implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@ApiModelProperty(dataType = "Integer", name = "id", value = "Código de identificação da Cozinha")
+	@ApiModelProperty(dataType = "Integer", name = "id", value = "Código de identificação da Cozinha", example = "6")
 	private Integer id;
 
 	@Column(nullable = false)
-	@ApiModelProperty(dataType = "String", name = "nome", value = "Nome da cozinha")
+	@ApiModelProperty(dataType = "String", name = "nome", value = "Nome da cozinha", example = "McDonald's")
 	private String nome;
 
 	@OneToMany(mappedBy = "cozinha")

@@ -16,7 +16,7 @@ public class CozinhaDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ApiModelProperty(dataType = "String", name = "nome", value = "Nome de transferencia de dados para cozinha")
+	@ApiModelProperty(dataType = "String", name = "nome", value = "Nome de transferencia de dados para cozinha", example = "McDonald's")
 	private String nome;
 
 	public CozinhaDTO() {

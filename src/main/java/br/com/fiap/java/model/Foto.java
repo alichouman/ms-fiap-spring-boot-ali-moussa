@@ -28,11 +28,11 @@ public class Foto implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@ApiModelProperty(dataType = "Integer", name = "id", value = "Código de identificação da foto")
+	@ApiModelProperty(dataType = "Integer", name = "id", value = "Código de identificação da foto", example = "10")
 	private Integer id;
 
 	@Column(nullable = false)
-	@ApiModelProperty(dataType = "String", name = "baseFoto", value = "Base 64 da foto")
+	@ApiModelProperty(dataType = "String", name = "baseFoto", value = "Base 64 da foto", example = "data:image/jpeg;base64,FOTO_EM_BASE_64")
 	private String baseFoto;
 
 	@ManyToOne
