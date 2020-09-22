@@ -85,7 +85,7 @@ public class CozinhaController {
 		return ResponseEntity.noContent().build();
 	}
 
-	@ApiOperation(value = "Atualiza uma cozinha cadastrada.")
+	@ApiOperation(value = "Deleta uma cozinha cadastrada.")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT, value = HttpStatus.NO_CONTENT)
 	@ApiResponses(value = { @ApiResponse(code = 204, message = "No Content"),
 			@ApiResponse(code = 400, message = "Bad Request", response = ErroPadraoBadRequest.class),
